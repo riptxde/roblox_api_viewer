@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riptxde's Roblox API Viewer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="resources/msgpack.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <svg class="logo-icon viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                Riptxde's Roblox API Viewer
+            </h1>
+            <p>Search and filter through the Roblox API</p>
+            <div class="metadata-display" id="metadataDisplay">
+                <span class="metadata-item">Version: <span id="apiVersion">Loading...</span></span>
+                <span class="metadata-separator">•</span>
+                <span class="metadata-item">Last Updated: <span id="apiUpdated">Loading...</span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-section">
+            <div class="query-section">
+                <label class="query-label">Query Expression</label>
+                <textarea class="query-box" id="queryBox" placeholder="Enter query expression (e.g., type == 'Event' && name.includes('Character'))"></textarea>
+                <div class="query-error" id="queryError"></div>
+            </div>
+
+            <div class="examples-section">
+                <label class="examples-label">Example Queries (click to use)</label>
+                <div class="examples-grid">
+                    <button class="example-btn" onclick="setQuery(`type == 'Event'`)">All Events</button>
+                    <button class="example-btn" onclick="setQuery(`type == 'Enum'`)">All Enums</button>
+                    <button class="example-btn" onclick="setQuery(`type == 'Property' && !unreplicated`)">Possibly-replicated Properties</button>
+                    <button class="example-btn" onclick="setQuery(`name.includes('Network')`)">Name contains 'Network'</button>
+                    <button class="example-btn" onclick="setQuery(`className == 'Player'`)">Player class only</button>
+                    <button class="example-btn" onclick="setQuery(`type == 'Event' && name.includes('Touch')`)">Touch-related Events</button>
+                    <button class="example-btn" onclick="setQuery(`hidden || unscriptable`)">Hidden or unscriptable members</button>
+                    <button class="example-btn" onclick="setQuery(`security != null`)">Has Security Level</button>
+                    <button class="example-btn" onclick="setQuery(`type == 'Function' && !deprecated`)">Non-deprecated Functions</button>
+                    <button class="example-btn" onclick="setQuery(`className.startsWith('Remote')`)">Remote classes</button>
+                    <button class="example-btn" onclick="setQuery(`inheritance.includes('BasePart')`)">Inherits from BasePart</button>
+                    <button class="example-btn" onclick="setQuery(`valueType == 'RBXScriptSignal'`)">Script Signals</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <button class="reset-btn" onclick="resetQuery()">Clear Query</button>
+            </div>
+        </div>
+
+        <div class="stats" id="stats"></div>
+
+        <div class="results" id="results"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
